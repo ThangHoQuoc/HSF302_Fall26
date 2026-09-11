@@ -1,12 +1,27 @@
 package fu.de200049;
 
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
+
+
+import fu.de200049.dao.EmployeeDAO;
+import fu.de200049.pojo.Employee;
+import fu.de200049.pojo.Gender;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("hsf302FU");
-        System.out.println("EMF tao thanh cong!");
 
+        EmployeeDAO dao = new EmployeeDAO();
+
+        // ===== CREATE =====
+        // [Lifecycle] emp dang o trang thai NEW/TRANSIENT (moi "new", chua lien quan DB)
+        Employee emp = new Employee("Nguyen Van A", "a@fpt.edu.vn",
+                new BigDecimal("15000000"), Gender.MALE, LocalDate.of(2022, 3, 1));
+
+        dao.save(emp);
+        // [Lifecycle] sau save(): trong luc persist() emp la MANAGED; sau khi method
+        // save() return (EntityManager da dong), emp tro thanh DETACHED.
+        System.out.println("Da tao: " + emp);
     }
 }

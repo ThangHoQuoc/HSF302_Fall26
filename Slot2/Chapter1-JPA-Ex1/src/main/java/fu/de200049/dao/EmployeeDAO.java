@@ -8,35 +8,22 @@ import jakarta.persistence.Persistence;
 
 public class EmployeeDAO {
 
-    private final EntityManagerFactory emf;
+    private static final EntityManagerFactory emf =
+            Persistence.createEntityManagerFactory("hsf302FU");
 
-    public EmployeeDAO() {
-        emf = Persistence.createEntityManagerFactory("hsf302PU");
-    }
-
-    public void save(Employee employee) {
+    public void save(Employee e) {
         EntityManager em = emf.createEntityManager();
-
         try {
             em.getTransaction().begin();
-
-            em.persist(employee);
-
+            em.persist(e); //
             em.getTransaction().commit();
-
-        } catch (Exception e) {
-            if (em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
-            }
-
-            throw e;
-
+        } catch (RuntimeException ex) {
+            if (em.getTransaction().isActive()) em.getTransaction().rollback();
+            throw ex;
         } finally {
             em.close();
         }
     }
 
-    public void close() {
-        emf.close();
-    }
+
 }
