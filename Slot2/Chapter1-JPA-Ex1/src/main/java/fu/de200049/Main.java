@@ -15,14 +15,12 @@ public class Main {
 
         EmployeeDAO dao = new EmployeeDAO();
 
-        // =========================================================
-        // TODO 0.8 - CREATE
-        // =========================================================
+
 
         // [Lifecycle]
         // emp dang o trang thai NEW/TRANSIENT
         // Vi vua duoc tao bang tu khoa "new" va chua duoc quan ly boi JPA.
-        Employee emp = new Employee(
+   /*     Employee emp = new Employee(
                 "Nguyen Van B",
                 "b@fpt.edu.vn",
                 new BigDecimal("15000000"),
@@ -31,11 +29,11 @@ public class Main {
         );
         dao.save(emp);
 
-        // =========================================================
+      // =========================================================
         // TODO 0.4 - READ
         // =========================================================
 
-        Employee found = dao.findById(emp.getId());
+       Employee found = dao.findById(emp.getId());
 
         // [Lifecycle]
         // found la MANAGED trong EntityManager cua findById().
@@ -43,7 +41,7 @@ public class Main {
         // Nhưng EntityManager da dong ngay truoc khi findById()
         // return -> found tro thanh DETACHED.
 
-        System.out.println("\n===== READ =====");
+       System.out.println("\n===== READ =====");
         System.out.println("Doc lai: " + found);
 
 
@@ -59,6 +57,36 @@ public class Main {
             System.out.println(employee);
         }
 
+
+   */
+
+        // =========================================================
+        // TODO 0.5 - FIND BY SALARY AND ACTIVE
+        // =========================================================
+
+        System.out.println("\n===== FIND BY SALARY AND ACTIVE =====");
+
+        List<Employee> highSalaryEmployees =
+                dao.findBySalaryGreaterThanAndActive(
+                        new BigDecimal("10000000")
+                );
+
+        for (Employee employee : highSalaryEmployees) {
+            System.out.println(employee);
+        }
+
+
+        // =========================================================
+        // TODO 0.5 - TEST NO RESULT
+        // =========================================================
+
+        System.out.println("\n===== FIND BY EMAIL - NO RESULT =====");
+
+        Employee notFound =
+                dao.findByEmail("notfound@fpt.edu.vn");
+
+        System.out.println("Ket qua: " + notFound);
     }
+
     }
 
