@@ -21,8 +21,8 @@ public class Main {
         // emp dang o trang thai NEW/TRANSIENT
         // Vi vua duoc tao bang tu khoa "new" va chua duoc quan ly boi JPA.
         Employee emp = new Employee(
-                "Nguyen Van C",
-                "c@fpt.edu.vn",
+                "Nguyen Van D",
+                "d@fpt.edu.vn",
                 new BigDecimal("15000000"),
                 Gender.MALE,
                 LocalDate.of(2022, 3, 1)
@@ -87,7 +87,7 @@ public class Main {
 
         System.out.println("Ket qua: " + notFound);
 
-*/
+
 
         // =========================================================
         // TODO 0.6 - UPDATE
@@ -123,9 +123,37 @@ public class Main {
         System.out.println("\n===== READ AFTER UPDATE =====");
         System.out.println("Salary sau update: "
                 + checkUpdate.getSalary());
+*/
+        // =========================================================
+        // TODO 0.7 - DELETE
+        // =========================================================
+
+        dao.delete(emp.getId());
+
+        // TODO 0.10 - Lifecycle: REMOVED
+        // Trong delete():
+        //
+        // 1. em.find() -> entity MANAGED
+        // 2. em.remove() -> entity REMOVED
+        // 3. commit() -> DELETE record trong database
+
+        System.out.println("\n===== DELETE =====");
+        System.out.println("Da xoa employee ID: " + emp.getId());
+
+
+        // =========================================================
+        // TODO 0.7 - READ AFTER DELETE
+        // =========================================================
+
+        Employee checkDelete = dao.findById(emp.getId());
+
+        System.out.println("\n===== READ AFTER DELETE =====");
+        System.out.println("Ket qua sau khi xoa: " + checkDelete);
+
+        // Ky vong:
+        // checkDelete == null
 
     }
-
 
 
     }
