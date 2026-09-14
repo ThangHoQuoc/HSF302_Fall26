@@ -120,12 +120,26 @@ public class Employee {
             return 0;
         }
 
+
         return Period.between(hireDate, LocalDate.now()).getYears();
     }
+    
 
     public void setYearsOfService(int yearsOfService) {
         this.yearsOfService = yearsOfService;
     }
 
-
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                ", salary=" + salary +
+                ", gender=" + gender +
+                ", hireDate=" + hireDate +
+                ", active=" + active +
+                ", yearsOfService=" + yearsOfService +
+                '}';
+    }
 }
