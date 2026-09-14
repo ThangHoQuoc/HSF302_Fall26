@@ -20,21 +20,21 @@ public class Main {
         // [Lifecycle]
         // emp dang o trang thai NEW/TRANSIENT
         // Vi vua duoc tao bang tu khoa "new" va chua duoc quan ly boi JPA.
-   /*     Employee emp = new Employee(
-                "Nguyen Van B",
-                "b@fpt.edu.vn",
+        Employee emp = new Employee(
+                "Nguyen Van C",
+                "c@fpt.edu.vn",
                 new BigDecimal("15000000"),
                 Gender.MALE,
                 LocalDate.of(2022, 3, 1)
         );
         dao.save(emp);
 
-      // =========================================================
+     // =========================================================
         // TODO 0.4 - READ
         // =========================================================
 
        Employee found = dao.findById(emp.getId());
-
+/*
         // [Lifecycle]
         // found la MANAGED trong EntityManager cua findById().
         //
@@ -58,7 +58,7 @@ public class Main {
         }
 
 
-   */
+
 
         // =========================================================
         // TODO 0.5 - FIND BY SALARY AND ACTIVE
@@ -86,7 +86,47 @@ public class Main {
                 dao.findByEmail("notfound@fpt.edu.vn");
 
         System.out.println("Ket qua: " + notFound);
+
+*/
+
+        // =========================================================
+        // TODO 0.6 - UPDATE
+        // =========================================================
+
+        // found hien tai la DETACHED
+        // Vi EntityManager cua findById() da dong.
+        //
+        // Thay doi object DETACHED khong tu dong update DB.
+        found.setSalary(new BigDecimal("17000000"));
+
+        Employee updated = dao.update(found);
+
+        // TODO 0.10 - Lifecycle: MERGE
+        // em.merge(found) khong bien found thanh MANAGED.
+        //
+        // merge() tao/tra ve mot object MANAGED moi.
+        // Object found ban dau van la DETACHED.
+        //
+        // Sau khi EntityManager trong update() dong,
+        // updated cung tro thanh DETACHED.
+
+        System.out.println("\n===== UPDATE =====");
+        System.out.println("Employee sau update: " + updated);
+
+
+        // =========================================================
+        // TODO 0.6 - READ AFTER UPDATE
+        // =========================================================
+
+        Employee checkUpdate = dao.findById(emp.getId());
+
+        System.out.println("\n===== READ AFTER UPDATE =====");
+        System.out.println("Salary sau update: "
+                + checkUpdate.getSalary());
+
     }
+
+
 
     }
 
