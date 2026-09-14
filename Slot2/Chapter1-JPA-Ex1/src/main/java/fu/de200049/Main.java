@@ -20,8 +20,8 @@ public class Main {
         // =====================================================
 
         Employee emp = new Employee(
-                "Nguyen Van E",
-                "e@fpt.edu.vn",
+                "Nguyen Van F",
+                "f@fpt.edu.vn",
                 new BigDecimal("15000000"),
                 Gender.MALE,
                 LocalDate.of(2022, 3, 1)
@@ -84,6 +84,53 @@ public class Main {
 
         System.out.println("\n===== READ AFTER DELETE =====");
         System.out.println("Ket qua: " + checkDelete);
+
+        // =====================================================
+// TODO 0.9 - TEST UNIQUE EMAIL
+// =====================================================
+
+        System.out.println("\n===== UNIQUE EMAIL TEST =====");
+
+// Employee thu nhat
+        Employee emp1 = new Employee(
+                "User 1",
+                "duplicate@fpt.edu.vn",
+                new BigDecimal("10000000"),
+                Gender.FEMALE,
+                LocalDate.now()
+        );
+
+// Employee thu hai dung cung email
+        Employee emp2 = new Employee(
+                "User 2",
+                "duplicate@fpt.edu.vn",
+                new BigDecimal("11000000"),
+                Gender.MALE,
+                LocalDate.now()
+        );
+
+// Save employee dau tien -> phai thanh cong
+        dao.save(emp1);
+
+        System.out.println("Da tao emp1: " + emp1);
+
+
+// Save employee thu hai -> ky vong exception
+        try {
+
+            dao.save(emp2);
+
+            // Neu chay den day thi unique constraint
+            // khong hoat dong nhu ky vong
+            System.out.println("LOI: khong xay ra exception!");
+
+        } catch (RuntimeException ex) {
+
+            System.out.println(
+                    "Da bat duoc loi trung email: "
+                            + ex.getClass().getSimpleName()
+            );
+        }
     }
 
 
