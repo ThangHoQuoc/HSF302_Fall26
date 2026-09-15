@@ -26,6 +26,7 @@ public class Main {
         // Entity chua duoc EntityManager quan ly.
 
         Employee emp = new Employee(
+
                 "Nguyen Van T",
                 "t@fpt.edu.vn",
                 new BigDecimal("15000000"),
