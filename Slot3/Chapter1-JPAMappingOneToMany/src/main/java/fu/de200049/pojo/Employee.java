@@ -113,4 +113,6 @@ public class Employee {
     public String toString() {
         return "Employee{" + "id=" + id + ", fullName='" + fullName + '\'' + ", email='" + email + '\'' + ", salary=" + salary + ", gender=" + gender + ", hireDate=" + hireDate + ", active=" + active + '}';
     }
+
+
 }
