@@ -42,7 +42,15 @@ public class Employee {
 
     public Employee() {
     }
-
+    public Employee(String email, String fullName, Gender gender,
+                    BigDecimal salary, LocalDate hireDate) {
+        this.email = email;
+        this.fullName = fullName;
+        this.gender = gender;
+        this.salary = salary;
+        this.hireDate = hireDate;
+        this.active = true;
+    }
     public Employee(String fullName, String email, BigDecimal salary, Gender gender, LocalDate hireDate) {
         this.fullName = fullName;
         this.email = email;
