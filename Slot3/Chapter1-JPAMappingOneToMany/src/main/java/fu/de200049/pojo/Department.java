@@ -25,6 +25,15 @@ public class Department {
     )
     private List<Employee> employees = new ArrayList<>();
 
+    public void addEmployee(Employee employee) {
+        employees.add(employee);
+        employee.setDepartment(this);
+    }
+
+    public void removeEmployee(Employee employee) {
+        employees.remove(employee);
+        employee.setDepartment(null);
+    }
 
     public List<Employee> getEmployees() {
         return employees;
@@ -71,13 +80,5 @@ public class Department {
     public String toString() {
         return "Department{" + "id=" + id + ", name='" + name + '\'' + ", location='" + location + '\'' + '}';
     }
-    public void addEmployee(Employee employee) {
-        employees.add(employee);
-        employee.setDepartment(this);
-    }
 
-    public void removeEmployee(Employee employee) {
-        employees.remove(employee);
-        employee.setDepartment(null);
-    }
 }
