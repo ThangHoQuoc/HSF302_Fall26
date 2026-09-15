@@ -28,11 +28,21 @@ public class Employee {
 
     private boolean active;
 
-    // Bắt buộc cho JPA
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id", nullable = false)
+    private Department department;
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
     public Employee() {
     }
 
-    // Constructor tiện dụng
     public Employee(String fullName, String email, BigDecimal salary, Gender gender, LocalDate hireDate) {
         this.fullName = fullName;
         this.email = email;
@@ -42,7 +52,6 @@ public class Employee {
         this.active = true;
     }
 
-    // Getter / Setter
 
     public Long getId() {
         return id;
